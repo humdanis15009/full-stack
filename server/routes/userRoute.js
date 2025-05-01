@@ -2,6 +2,8 @@ import express from 'express';
 import { getUsers, createUser, authUser, getProfile, updateUserProfile, deleteUser, getUserById } from '../controllers/userController.js';
 import { admin, protect } from '../middlewares/authMiddleware.js';
 import upload from '../middlewares/UploadMiddleware.js';
+import { sendOtp } from '../controllers/otpController.js';
+import { forgotPassword, resetPassword } from '../controllers/forgotPasswordController.js';
 
 const router = express.Router();
 
@@ -39,5 +41,9 @@ router.route('/:id')
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUserProfile);
 
+router.post('/send', sendOtp);
+
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password', resetPassword);
 
 export default router;
