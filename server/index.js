@@ -9,6 +9,15 @@ import path from 'path';
 
 const app = express();
 
+app.use(express.static('public', {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  }
+}));
+
+
 dotenv.config();
 connectDB();
 app.use(cors({
