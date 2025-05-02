@@ -6,6 +6,8 @@
 // export default upload;
 
 // middleware/upload.js
+
+// Uploads Folder
 import multer from 'multer';
 import path from 'path';
 
