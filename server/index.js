@@ -5,7 +5,7 @@ import { notFound, errorHandler } from './middlewares/errorMiddleware.js';
 import connectDB from './config/db.js';
 import userRoute from './routes/userRoute.js';
 import path from 'path';
-import upload from './middlewares/UploadMiddleware.js';
+// import upload from './middlewares/uploadMiddleware.js';
 
 const app = express();
 

@@ -1,7 +1,7 @@
 import express from 'express';
 import { getUsers, createUser, authUser, getProfile, updateUserProfile, deleteUser, getUserById } from '../controllers/userController.js';
 import { admin, protect } from '../middlewares/authMiddleware.js';
-import upload from '../middlewares/UploadMiddleware.js';
+import upload from '../middlewares/uploadMiddleware.js';
 import { sendOtp } from '../controllers/otpController.js';
 import { forgotPassword, resetPassword } from '../controllers/forgotPasswordController.js';
 
