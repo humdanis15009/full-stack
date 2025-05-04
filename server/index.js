@@ -4,8 +4,8 @@ import cors from 'cors';
 import { notFound, errorHandler } from './middlewares/errorMiddleware.js';
 import connectDB from './config/db.js';
 import userRoute from './routes/userRoute.js';
-import path from 'path';
-// import upload from './middlewares/uploadMiddleware.js';
+import imageRoutes from './routes/imageRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 
 const app = express();
 
@@ -31,10 +31,12 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-// Mount your routesif 
 app.use('/api/users', userRoute);
 
-app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+app.use('/api/images', imageRoutes); 
+
+app.use('/api/admin', adminRoutes);
+
 
 app.use(notFound);
 app.use(errorHandler);
