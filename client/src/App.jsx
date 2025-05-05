@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
 import ImageUpload from './components/ImageUpload';
 import AdminDashboard from './pages/AdminDashboard';
+import ChatRoom from './components/ChatRoom';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/" element={<h1>Home Page</h1>} />
           <Route path="/upload" element={<ImageUpload />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/chatRoom" element={<ChatRoom />} />
         </Routes>
       </Router>
     </div>
