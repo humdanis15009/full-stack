@@ -1,29 +1,3 @@
-// // controllers/chatController.js
-// import Message from '../models/messageModel.js';
-
-// export const getMessages = async (req, res) => {
-//     const { senderId, receiverId } = req.params;
-//     const messages = await Message.find({
-//         $or: [
-//             { sender: senderId, receiver: receiverId },
-//             { sender: receiverId, receiver: senderId },
-//         ],
-//     }).sort({ timestamp: 1 });
-
-//     res.json(messages);
-// };
-
-// export const sendMessage = async (req, res) => {
-//     try {
-//         const { sender, receiver, content } = req.body;
-//         const message = await Message.create({ sender, receiver, content });
-//         res.status(201).json(message);
-//     } catch (error) {
-//         res.status(400).json({ error: error.message });
-//     }
-// };
-
-
 import mongoose from 'mongoose';
 import Message from '../models/messageModel.js';
 

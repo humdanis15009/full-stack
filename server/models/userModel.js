@@ -4,12 +4,14 @@ const userSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
+            index: true
         },
         email: {
             type: String,
             required: true,
-            unique: true
+            unique: true,
+            index: true
         },
         password: {
             type: String,
@@ -19,10 +21,17 @@ const userSchema = new mongoose.Schema(
             type: String,
             enum: ['user', 'admin'],
             default: 'user',
-            required: true
+            required: true,
+            index: true
         },
-        resetToken: String,
-        tokenExpire: Date,
+        resetToken: {
+            type: String,
+            index: true
+        },
+        tokenExpire: {
+            type: Date,
+            index: { expires: 3600*24 }
+        }
     },
     {
         timestamps: true

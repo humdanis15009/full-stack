@@ -5,12 +5,12 @@ export const getStats = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
     const activeUsers = await User.countDocuments({ isActive: true }); // Optional
-    const recentUsers = await User.find().sort({ createdAt: -1 }).limit(5);
+    const recentUsers = await User.find({ createdAt: { $lt: new Date() } }).sort({ createdAt: -1 }).limit(5);
 
     res.json({
       totalUsers,
       activeUsers,
-      recentUsers,
+      recentUsers
     });
   } catch (error) {
     res.status(500).json({ message: 'Failed to fetch stats' });

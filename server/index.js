@@ -9,6 +9,9 @@ import imageRoutes from './routes/imageRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import { Server } from 'socket.io'
 import chatRoutes from './routes/chatRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
+
+
 
 const app = express();
 const server = http.createServer(app);
@@ -65,6 +68,8 @@ app.use('/api/images', imageRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.use('/api/chat', chatRoutes);
+
+app.use('/api/payment', paymentRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

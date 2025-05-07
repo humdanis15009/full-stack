@@ -7,12 +7,14 @@ import Navbar from './components/Navbar';
 import ImageUpload from './components/ImageUpload';
 import AdminDashboard from './pages/AdminDashboard';
 import ChatRoom from './components/ChatRoom';
+import PaymentForm from './components/PaymentForm';
 
 const App = () => {
   return (
     <div>
       <Router>
         <Navbar />
+        <PaymentForm />
         <Routes>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
