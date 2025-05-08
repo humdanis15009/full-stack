@@ -3,6 +3,7 @@ import { getUsers, createUser, authUser, getProfile, updateUserProfile, deleteUs
 import { admin, protect } from '../middlewares/authMiddleware.js';
 import { sendOtp } from '../controllers/otpController.js';
 import { forgotPassword, resetPassword } from '../controllers/forgotPasswordController.js';
+import { aggController } from '../controllers/aggController.js';
 
 const router = express.Router();
 
@@ -24,5 +25,7 @@ router.post('/send', sendOtp);
 
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password', resetPassword);
+
+router.get('/aggregate/roles', aggController);
 
 export default router;
