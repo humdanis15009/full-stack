@@ -21,7 +21,7 @@ export const aggController = async (req, res) => {
         //           { "profile.country": "India" }
         //         ]
         //       }
-               
+
         // },
         // { 
         //     $group: 
@@ -52,6 +52,22 @@ export const aggController = async (req, res) => {
         //     }
         //   }}
 
+        {
+            $unwind: "$subscriptions"
+        },
+        {
+            $group: {
+                _id: "$subscriptions.plan",
+                dayAvg: {
+                    $avg: {
+                        $divide: [
+                            { $subtract: ["$subscriptions.endDate", "$subscriptions.startDate"] },
+                            1000 * 60 * 60 * 24
+                        ]
+                    }
+                }
+            }
+        }
     ]);
     res.json(result);
 }

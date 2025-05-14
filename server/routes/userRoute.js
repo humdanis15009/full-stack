@@ -4,12 +4,14 @@ import { admin, protect } from '../middlewares/authMiddleware.js';
 import { sendOtp } from '../controllers/otpController.js';
 import { forgotPassword, resetPassword } from '../controllers/forgotPasswordController.js';
 import { aggController } from '../controllers/aggController.js';
+import { softDeleteUser } from '../controllers/softDeleteUser.js';
 
 const router = express.Router();
 
 router.route('/')
-  .get(protect, admin, getUsers)    // GET /api/users
+  .get(/*protect, admin,*/ getUsers)    // GET /api/users
   .post(createUser) // POST /api/users
+
 router.post('/login', authUser);
 
 router.route("/profile")
@@ -17,7 +19,8 @@ router.route("/profile")
   .put(protect, updateUserProfile)
 
 router.route('/:id')
-  .delete(protect, admin, deleteUser)
+  // .delete(protect, admin, deleteUser)
+  .delete(softDeleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUserProfile);
 

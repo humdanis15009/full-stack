@@ -1,72 +1,44 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const ImageUpload = () => {
-    const [file, setFile] = useState(null);
-    const [preview, setPreview] = useState('');
-    const [uploading, setUploading] = useState(false);
-    const [message, setMessage] = useState('');
+function ImageUpload() {
+  const [selectedFile, setSelectedFile] = useState(null);
 
-    const handleFileChange = (e) => {
-        const selected = e.target.files[0];
-        setFile(selected);
-        setPreview(URL.createObjectURL(selected));
-    };
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
 
-    const handleUpload = async (e) => {
-        e.preventDefault();
-        if (!file) return setMessage('Please select a file');
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
 
-        const formData = new FormData();
-        formData.append('image', file);
-        console.log(formData);
+      await axios.post('http://localhost:3000/api/images/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-        try {
-            setUploading(true);
-            setMessage('');
+      console.log('File uploaded successfully');
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
 
-            const res = await fetch('http://localhost:3000/api/images/upload', {
-                method: 'POST',
-                // headers: {
-                //     // Authorization: `Bearer ${localStorage.getItem('token')}`, // or pass from props/context
-                // },
-                body: formData,
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) throw new Error(data.message || 'Upload failed');
-
-            setMessage('Upload successful!');
-            console.log('Uploaded Image:', data);
-        } catch (err) {
-            console.error(err);
-            setMessage(err.message || 'Error uploading image');
-        } finally {
-            setUploading(false);
-        }
-    };
-
-    return (
-        <div style={{ maxWidth: '400px', margin: 'auto' }}>
-            <h2>Upload Image</h2>
-            <form onSubmit={handleUpload}>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                />
-                {preview && (
-                    <div style={{ margin: '10px 0' }}>
-                        <img src={preview} alt="Preview" width="100%" />
-                    </div>
-                )}
-                <button type="submit" disabled={uploading}>
-                    {uploading ? 'Uploading...' : 'Upload'}
-                </button>
-            </form>
-            {message && <p>{message}</p>}
-        </div>
-    );
-};
+  return (
+    <>
+      <h1>How to Upload File Using Multer</h1>
+      <img src='http://localhost:3000/download/image.png' height={100} alt='Uploaded'/>
+      <div className="card">
+        <h2>Upload File</h2>
+        <input type="file" onChange={handleFileChange} />
+        <button onClick={handleSubmit}>Upload</button>
+      </div>
+      <p className="read-the-docs">
+        Video by : Web Codder
+      </p>
+    </>
+  );
+}
 
 export default ImageUpload;

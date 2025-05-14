@@ -1,29 +1,14 @@
 import mongoose from 'mongoose';
 
-const imageSchema = new mongoose.Schema(
-    {
-        url: {
-            type: String,
-            required: true,
-        },
-        public_id: {
-            type: String,
-            required: true,
-        },
-        filename: {
-            type: String,
-        },
-        uploadedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User', 
-            required: true
-        }
-    },
-    {
-        timestamps: true,
-    }
-);
+const fileSchema = new mongoose.Schema({
+  originalName: { type: String, required: true },
+  storedName: { type: String, required: true },
+  size: { type: Number, required: true },
+  mimeType: { type: String, required: true },
+  path: { type: String, required: true },
+  uploadedAt: { type: Date, default: Date.now }
+});
 
-const Image = mongoose.model('Image', imageSchema);
+const File = mongoose.model('File', fileSchema);
 
-export default Image;
+export default File;

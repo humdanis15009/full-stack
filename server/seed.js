@@ -33,7 +33,9 @@ await User.insertMany([
         startDate: new Date(),
         endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
       }
-    ]
+    ],
+    isDeleted: true,
+    deletedAt: null
   },
   {
     name: 'Bob',
@@ -43,7 +45,9 @@ await User.insertMany([
     profile: { age: 25, gender: 'male', country: 'Canada' },
     activity: [
       { date: new Date(), type: 'purchase', metadata: { ip: '2.2.2.2', device: 'desktop' } }
-    ]
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'Charlie',
@@ -61,7 +65,9 @@ await User.insertMany([
         startDate: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000),
         endDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
       }
-    ]
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'Diana',
@@ -75,8 +81,10 @@ await User.insertMany([
       preferences: { newsletter: false, notifications: true }
     },
     activity: [
-      { date: new Date(), type: 'logout', metadata: { ip: '4.4.4.4', device: 'laptop' } } // Changed 'comment' -> 'logout'
-    ]
+      { date: new Date(), type: 'logout', metadata: { ip: '4.4.4.4', device: 'laptop' } }
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'Ethan',
@@ -85,8 +93,10 @@ await User.insertMany([
     role: 'user',
     profile: { age: 22, gender: 'male', country: 'Australia' },
     activity: [
-      { date: new Date(), type: 'login', metadata: { ip: '5.5.5.5', device: 'mobile' } } // Changed 'signup' -> 'login'
-    ]
+      { date: new Date(), type: 'login', metadata: { ip: '5.5.5.5', device: 'mobile' } }
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'Fiona',
@@ -106,7 +116,9 @@ await User.insertMany([
         startDate: new Date(),
         endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
       }
-    ]
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'George',
@@ -117,7 +129,9 @@ await User.insertMany([
     activity: [
       { date: new Date(), type: 'login', metadata: { ip: '6.6.6.6', device: 'desktop' } },
       { date: new Date(), type: 'purchase', metadata: { ip: '6.6.6.6', device: 'desktop' } }
-    ]
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'Hannah',
@@ -131,11 +145,13 @@ await User.insertMany([
     subscriptions: [
       {
         plan: 'pro',
-        status: 'cancelled', // Changed 'canceled' -> 'cancelled'
+        status: 'cancelled',
         startDate: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000),
         endDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
       }
-    ]
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'Ivan',
@@ -144,8 +160,10 @@ await User.insertMany([
     role: 'user',
     profile: { age: 35, gender: 'male', country: 'Russia' },
     activity: [
-      { date: new Date(), type: 'logout', metadata: { ip: '8.8.8.8', device: 'desktop' } } // Changed 'password_change' -> 'logout'
-    ]
+      { date: new Date(), type: 'logout', metadata: { ip: '8.8.8.8', device: 'desktop' } }
+    ],
+    isDeleted: false,
+    deletedAt: null
   },
   {
     name: 'Julia',
@@ -160,11 +178,11 @@ await User.insertMany([
         startDate: new Date(),
         endDate: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)
       }
-    ]
+    ],
+    isDeleted: false,
+    deletedAt: null
   }
 ]);
-
-
 
 console.log('Seeded users');
 process.exit();

@@ -21,7 +21,7 @@ const paymentSchema = new mongoose.Schema(
         },
         payment_status: {
             type: String,
-            default: 'PENDING', 
+            default: 'PENDING',
         },
         payment_link_id: {
             type: String,
@@ -30,7 +30,7 @@ const paymentSchema = new mongoose.Schema(
             type: String,
         },
         payment_method: {
-            type: String, 
+            type: String,
         },
     },
     {

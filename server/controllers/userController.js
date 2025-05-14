@@ -5,7 +5,7 @@ import generateToken from '../utils/generateToken.js';
 // GET all users
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({isDeleted: false});
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
