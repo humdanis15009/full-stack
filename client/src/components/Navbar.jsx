@@ -1,13 +1,15 @@
-// src/components/Navbar.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = () => (
-    <nav>
-        <Link to="/">Home</Link> |{' '}
-        <Link to="/login">Login</Link> |{' '}
-        <Link to="/register">Register</Link>
-    </nav>
-);
+const Navbar = () => {
+
+    return (
+        <nav>
+            <Link to="/">Home</Link> |{' '}
+            <Link to="/login">Login</Link> |{' '}
+            <Link to="/register">Register</Link> |{' '}
+            <Link to="/logout">Logout</Link> |{' '}
+        </nav>
+    );
+};
 
 export default Navbar;

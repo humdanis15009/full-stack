@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUsers, createUser, authUser, getProfile, updateUserProfile, deleteUser, getUserById } from '../controllers/userController.js';
+import { getUsers, createUser, authUser, getProfile, updateUserProfile, deleteUser, getUserById, logout } from '../controllers/userController.js';
 import { admin, protect } from '../middlewares/authMiddleware.js';
 import { sendOtp } from '../controllers/otpController.js';
 import { forgotPassword, resetPassword } from '../controllers/forgotPasswordController.js';
@@ -13,6 +13,7 @@ router.route('/')
   .post(createUser) // POST /api/users
 
 router.post('/login', authUser);
+router.post('/logout', logout);
 
 router.route("/profile")
   .get(protect, getProfile)

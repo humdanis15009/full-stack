@@ -1,6 +1,7 @@
 // routes/imageRoutes.js
 import express from 'express';
 import upload from '../middlewares/uploadMiddleware.js';
+import { protect } from '../middlewares/authMiddleware.js'
 import {
   uploadImage,
   downloadImage,
@@ -9,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.post('/upload', upload.single('file'), uploadImage);
+router.post('/upload', protect, upload.single('file'), uploadImage);
 router.get('/download/:filename', downloadImage);
 router.delete('/delete/:filename', deleteImage);
 

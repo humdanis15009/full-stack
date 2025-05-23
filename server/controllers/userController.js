@@ -2,10 +2,11 @@ import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
 import generateToken from '../utils/generateToken.js';
 
+
 // GET all users
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({isDeleted: false});
+    const users = await User.find({ isDeleted: false });
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -40,8 +41,7 @@ export const createUser = async (req, res) => {
         name: user.name,
         email: user.email,
         password: hashedPassword,
-        role: user.role,
-
+        role: user.role
       });
     } else {
       res.status(400).json({ message: 'Invalid user data' });
@@ -61,11 +61,20 @@ export const authUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+      const token = generateToken(user._id);
+
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: 'production',
+        sameSite: 'Strict',
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+
       res.json({
         _id: user._id,
         name: user.name,
         email: user.email,
-        token: generateToken(user._id)
+        token: user.token
       });
     } else {
       res.status(401).json({ message: 'Invalid email or password' });
@@ -74,6 +83,17 @@ export const authUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// routes/auth.js or controllers/authController.js
+export const logout = (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    sameSite: 'Strict',
+    secure: process.env.NODE_ENV === 'production'
+  });
+  res.status(200).json({ message: 'Logged out successfully' });
+};
+
 
 // GET /api/users/profile
 export const getProfile = async (req, res) => {

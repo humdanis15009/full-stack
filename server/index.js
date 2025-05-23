@@ -10,11 +10,12 @@ import adminRoutes from './routes/adminRoutes.js'
 import { Server } from 'socket.io'
 import chatRoutes from './routes/chatRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
-
+import cookieParser from 'cookie-parser';
 
 
 const app = express();
 const server = http.createServer(app);
+app.use(cookieParser());
 
 const io = new Server(server, {
   cors: {

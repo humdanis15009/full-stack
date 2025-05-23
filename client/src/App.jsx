@@ -8,6 +8,7 @@ import ImageUpload from './components/ImageUpload';
 import AdminDashboard from './pages/AdminDashboard';
 import ChatRoom from './components/ChatRoom';
 import PaymentForm from './components/PaymentForm';
+import Logout from './components/Logout';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <PaymentForm />
         <Routes>
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/" element={<h1>Home Page</h1>} />
           <Route path="/upload" element={<ImageUpload />} />

@@ -5,15 +5,34 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Upload handler
-export const uploadImage = (req, res) => {
+import File from '../models/imageModel.js'; 
+
+export const uploadImage = async (req, res) => {
     if (!req.file) {
         return res.status(400).send('No files were uploaded.');
     }
 
-    console.log(req.file);
-    res.status(201).send('File uploaded successfully.');
+    const { originalname, filename, size, mimetype, path: filePath } = req.file;
+
+    try {
+        const fileDoc = new File({
+            originalName: originalname,
+            storedName: filename,
+            size: size,
+            mimeType: mimetype,
+            path: filePath,
+            uploadedby: req.user._id 
+        });
+
+        await fileDoc.save();  // 💾 Save to MongoDB
+
+        res.status(201).send('File uploaded and saved to DB successfully.');
+    } catch (error) {
+        console.error('Error saving to DB:', error);
+        res.status(500).send('Error saving file info to database.');
+    }
 };
+
 
 // Download handler
 export const downloadImage = (req, res) => {
